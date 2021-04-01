@@ -13,7 +13,7 @@ APP_BUCKET = "builds-${REGION}"
 CLUSTER_NAME_INTEGRATION = "cluster-integration"
 CLUSTER_NAME_STAGE = "cluster-stage"
 CLUSTER_NAME_PRODUCTION = "cluster-production"
-CLUSTER_SERVICE="envoy-proxy-bradesco"
+CLUSTER_SERVICE="envoy-proxy"
 DEPLOYTARGET = ['production', 'integration', 'stage']
 
 // Environment-specifc variables
@@ -63,9 +63,9 @@ def scmCheckout() {
 def fetchSettings() {
   stage("Fetch settings from S3") {
     settingsBucket = "s3://projects/settings/${APP_NAME}/${ENVIRONMENT}"
-    sh "aws s3 cp ${settingsBucket}/bradesco-sandbox-private.key ./bradesco-sandbox-private.key" 
-    sh "aws s3 cp ${settingsBucket}/bradesco-sandbox-public.crt ./bradesco-sandbox-public.crt" 
-    sh "aws s3 cp ${settingsBucket}/bradesco-sandbox.pem ./bradesco-sandbox.pem"
+    sh "aws s3 cp ${settingsBucket}/private.key ./private.key" 
+    sh "aws s3 cp ${settingsBucket}/public.crt ./public.crt" 
+    sh "aws s3 cp ${settingsBucket}/sandbox.pem ./sandbox.pem"
 
   }
 }
